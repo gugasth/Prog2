@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <unordered_map>
+#include <list>
+
+using namespace std;
+
+int main(int argc, char * argv[]) {
+    ifstream arq(argv[1]);
+
+    unordered_map<string,int>tabelinha_hash;
+    string palavra;
+    while (arq >> palavra) {
+        // se chave palavra já existe na tabela ...
+        if (tabelinha_hash.count(palavra) > 0) {
+            // ... acessa o valor a ela associado, que é a quantidade de vezes que a palavra aparece
+            // e a ela soma +1
+            tabelinha_hash[palavra] += 1;
+        } else {
+            // ... senão armazena a quantidade é 1
+            tabelinha_hash[palavra] = 1;
+        }
+    }
+
+    for (auto & par: tabelinha_hash){
+        cout << par.first << " " << par.second << endl;
+    }
+
+    return 0;
+}
